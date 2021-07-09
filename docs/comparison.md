@@ -43,7 +43,7 @@ All features are marked to indicate the following:
 | Devtools                                   | ✅                                  | ✅                                            | ✅                             |
 | Subscriptions                              | ✅                                  | ✅                                            | ✅                             |
 | Client-side Rehydration                    | ✅                                  | ✅                                            | ✅                             |
-| Polled Queries                             | ✅                                  | ✅                                            | ✅                             |
+| Polled Queries                             | 🛑                                  | ✅                                            | ✅                             |
 | Lazy Queries                               | ✅                                  | ✅                                            | ✅                             |
 | Stale while Revalidate / Cache and Network | ✅                                  | ✅                                            | ✅                             |
 | Focus Refetching                           | ✅ `@urql/exchange-refocus`         | 🛑                                            | 🛑                             |
