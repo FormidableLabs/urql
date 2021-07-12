@@ -1,5 +1,11 @@
 # @urql/exchange-multipart-fetch
 
+## 0.1.13
+
+### Patch Changes
+
+- Bump extract-files package to 11.0.0, by [@haswalt](https://github.com/haswalt) (See [#1795](https://github.com/FormidableLabs/urql/pull/1795))
+
 ## 0.1.12
 
 ### Patch Changes
