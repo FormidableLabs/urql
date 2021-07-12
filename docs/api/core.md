@@ -320,6 +320,16 @@ the `fetchExchange`.
 An exchange that writes incoming `Operation`s to `console.log` and
 writes completed `OperationResult`s to `console.log`.
 
+It accepts two optional input functions `onIncoming` and `onCompleted` which can
+be supplied to override the default log behavior
+
+```ts
+debugExchange({
+  onIncoming: op => console.warn('Incoming Operation: ', op.key, op.kind),
+  onCompleted: result => console.warn('Result data: ', result.operation.key, result.data),
+});
+```
+
 ### dedupExchange
 
 An exchange that keeps track of ongoing `Operation`s that haven't returned had

@@ -29,7 +29,7 @@ beforeEach(() => {
 it('forwards query operations correctly', async () => {
   jest.spyOn(global.console, 'log').mockImplementation();
   const { source: ops$, next, complete } = input;
-  const exchange = debugExchange(exchangeArgs)(ops$);
+  const exchange = debugExchange({})(exchangeArgs)(ops$);
 
   publish(exchange);
   next(queryOperation);
@@ -38,6 +38,24 @@ it('forwards query operations correctly', async () => {
   expect(console.log).toBeCalled();
   // eslint-disable-next-line no-console
   expect(console.log).toBeCalledTimes(2);
+});
+
+it('calls custom functions when supplied', async () => {
+  jest.spyOn(global.console, 'log').mockImplementation();
+  const onIncoming = jest.fn();
+  const onCompleted = jest.fn();
+  const { source: ops$, next, complete } = input;
+  const exchange = debugExchange({ onIncoming, onCompleted })(exchangeArgs)(
+    ops$
+  );
+
+  publish(exchange);
+  next(queryOperation);
+  complete();
+  // eslint-disable-next-line no-console
+  expect(console.log).not.toBeCalled();
+  expect(onIncoming).toHaveBeenCalledTimes(1);
+  expect(onCompleted).toHaveBeenCalledTimes(1);
 });
 
 describe('production', () => {
@@ -52,7 +70,7 @@ describe('production', () => {
   it('is a noop in production', () => {
     const { source: ops$ } = input;
 
-    debugExchange({
+    debugExchange({})({
       forward: ops => {
         expect(ops).toBe(ops$);
       },

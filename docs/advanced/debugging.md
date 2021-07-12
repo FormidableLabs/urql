@@ -138,3 +138,8 @@ custom exchanges:
 - ❌ **Don't send warnings in debug events**: Informing your user about warnings isn't effective
   when the event isn't seen. You should still rely on `console.warn` so all users see your important
   warnings.
+
+## Debug Exchange
+
+Another debugging option is to use the `debugExchange` included in urql core. This exchange adds
+customizable logs which may be helpful for debugging. See the ["debugExchange" on the @urql/core API page.](../api/core/#debugexchange)

@@ -1,20 +1,28 @@
 import { pipe, tap } from 'wonka';
-import { Exchange } from '../types';
+import { Exchange, Operation, OperationResult } from '../types';
 
-export const debugExchange: Exchange = ({ forward }) => {
+const defaultIncomingLog = (op: Operation) =>
+  // eslint-disable-next-line no-console
+  console.log('[Exchange debug]: Incoming operation: ', op);
+const defaultCompletedLog = (result: OperationResult) =>
+  // eslint-disable-next-line no-console
+  console.log('[Exchange debug]: Completed operation: ', result);
+
+export interface DebugExchangeOptions {
+  onIncoming?: (op: Operation) => void;
+  onCompleted?: (result: OperationResult) => void;
+}
+
+export const debugExchange = (options: DebugExchangeOptions): Exchange => ({
+  forward,
+}) => {
   if (process.env.NODE_ENV === 'production') {
     return ops$ => forward(ops$);
   } else {
-    return ops$ =>
-      pipe(
-        ops$,
-        // eslint-disable-next-line no-console
-        tap(op => console.log('[Exchange debug]: Incoming operation: ', op)),
-        forward,
-        tap(result =>
-          // eslint-disable-next-line no-console
-          console.log('[Exchange debug]: Completed operation: ', result)
-        )
-      );
+    const {
+      onIncoming = defaultIncomingLog,
+      onCompleted = defaultCompletedLog,
+    } = options || {};
+    return ops$ => pipe(ops$, tap(onIncoming), forward, tap(onCompleted));
   }
 };
