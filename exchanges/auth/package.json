@@ -1,6 +1,6 @@
 {
   "name": "@urql/exchange-auth",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "An exchange for managing authentication and token refresh in urql",
   "sideEffects": false,
   "homepage": "https://formidable.com/open-source/urql/docs/",

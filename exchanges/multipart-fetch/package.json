@@ -1,6 +1,6 @@
 {
   "name": "@urql/exchange-multipart-fetch",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "An exchange that allows regular fetch and will transition to multipart when files are included",
   "sideEffects": false,
   "homepage": "https://formidable.com/open-source/urql/docs/",
